@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ショッピングページ</title>
+    <script src="https://js.stripe.com/v3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link rel="stylesheet" href="dist/css/modal-fx.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body style="background-color: #203846">
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered is-multiline has-text-white has-text-centered	">
+                <div class="column is-one-third">
+                    <figure class="image is-1by1">
+                        <img src="./img/cbd_oil.jpg" />
+                    </figure>
+                    <p class="is-size-4 has-text-weight-bold">
+                        エンハンスト CBD<br /> オイル
+                    </p>
+                    <div class="columns is-vcentered is-mobile">
+                        <div class="column">
+                            <p class="is-size-4">
+                                ¥11,900
+                            </p>
+                        </div>
+                        <div class="column control">
+                            <form oninput="calc();">
+                                <input type="number" name="oil" placeholder="0" class="input is-small"
+                                    style="width:3em;">個
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
+                    <!--<button class="button is-white" id="checkout-button-sku_FwU7fTXWyjSVUZ" role="link">
+                        購入する
+                    </button>-->
+                </div>
+                <div class="column is-one-third">
+                    <figure class="image is-1by1">
+                        <img src="./img/cbd_body_cream.jpg" />
+                    </figure>
+                    <p class="is-size-4 has-text-weight-bold">
+                        エンハンスト CBD<br /> ボディークリーム
+                    </p>
+                    <div class="columns is-vcentered is-mobile">
+                        <div class="column">
+                            <p class="is-size-4">
+                                ¥9,800
+                            </p>
+                        </div>
+                        <div class="column control">
+                            <form oninput="calc();">
+                                <input type="number" name="cream" placeholder="0" class="input is-small"
+                                    style="width:3em;">個
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <figure class="image is-1by1">
+                        <img src="./img/cbd_roll_on_gel.jpg" />
+                    </figure>
+                    <p class="is-size-4 has-text-weight-bold">
+                        エンハンスト CBD<br /> ロールオン
+                    </p>
+                    <div class="columns is-vcentered is-mobile">
+                        <div class="column">
+                            <p class="is-size-4">
+                                ¥10,300
+                            </p>
+                        </div>
+                        <div class="column control">
+                            <form oninput="calc();">
+                                <input type="number" name="roll" placeholder="0" class="input is-small"
+                                    style="width:3em;">個
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <figure class="image is-1by1">
+                        <img src="./img/cbd_family_pack.jpg" />
+                    </figure>
+                    <p class="is-size-4 has-text-weight-bold">
+                        エンハンスト CBD<br /> ファミリーパック
+                    </p>
+                    <div class="columns is-vcentered is-mobile">
+                        <div class="column">
+                            <p class="is-size-4">
+                                ¥10,300
+                            </p>
+                        </div>
+                        <div class="column">
+                            <input type="text" placeholder="0" class="input is-small" style="width:3em;"
+                                form="sumPrice">個
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar is-fixed-bottom">
+            <div class="container">
+                <div class="columns is-mobile">
+                    <div class="column">
+                        小計
+                    </div>
+                    <div class="column">
+                        <div id="result">¥0</div>
+                        <script>
+                            function calc() {
+                                var oil = document.getElementsByName("oil")[0].value
+                                var cream = document.getElementsByName("cream")[0].value
+                                var roll = document.getElementsByName("roll")[0].value
+                                var result = document.getElementById("result");
+                                var oil_n, cream_n, roll_n;
+                                if (!oil) { oil_n = 0; } else { oil_n = parseInt(oil); }
+                                if (!cream) { cream_n = 0; } else { cream_n = parseInt(cream); }
+                                if (!roll) { roll_n = 0; } else { roll_n = parseInt(roll); }
+
+                                result.innerText = "¥" + (oil_n * 11900 + cream_n * 9800 + roll_n * 10300);
+                            }
+                        </script>
+
+                    </div>
+                </div>
+                <span class="button modal-button" data-target="modal-fadeInScale-fs">配送先入力へ</span>
+            </div>
+        </nav>
+
+        <div id="modal-fadeInScale-fs" class="modal modal-full-screen modal-fx-fadeInScale">
+            <div class="modal-content modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">配送先情報入力</p>
+                    <button class="modal-button-close delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="container">
+                        <div class="field">
+                            <label class="label">氏名</label>
+                            <div class="control">
+                                <input id="name" class="input" type="text" placeholder="山本太郎">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">郵便番号</label>
+                            <div class="control">
+                                <input id="postalcode" class="input" type="text" placeholder="100-0001">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">住所</label>
+                            <div class="control">
+                                <input id="address" class="input" type="text" placeholder="東京都渋谷区代々木５−５５−５CBDビル４F">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">電話番号</label>
+                            <div class="control">
+                                <input id="phone" class="input" type="text" placeholder="090-1111-2222">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">メールアドレス</label>
+                            <div class="control">
+                                <input id="email" class="input" type="text" placeholder="yours@mail.com">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success" onclick="toCheckout()">次へ</button>
+                    <button class="modal-button-close button">戻る</button>
+                </footer>
+            </div>
+        </div>
+
+    </section>
+
+    <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
+    <script src="./js/stripe.js"></script>
+</body>
+
+</html>
